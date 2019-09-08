@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>todo-list</title>
+    <link rel="stylesheet" href="main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="addText" placeholder="ToDoを入力">
+      <button v-on:click="addToDo()">追加</button>
+      <hr>
+      <table>
+        <thread>
+        <tr>
+          <td>ID</td>
+          <td>ToDo</td>
+          <td>進捗状況</td>
+          <td>操作</td>
+          <td>日付</td>
+        </tr>
+        </thread>
+        <tbody>
+          <tr v-for="todo in list" v-if="todo.flag === true">
+            <td>
+              {{ todo.id }}<br>
+            </td>
+            <td class="todo">{{ todo.text }}</td>
+            <td>
+              <button @click="changeToDo(todo.id)" class="complete">作業完了</button>
+            </td>
+            <td>
+              <button @click="deleteToDo(todo.id)">削除</button>
+              <button @click="editToDo(todo.id)">更新</button>  
+            </td>
+            <td>
+              {{ todo.date }}
+            </td>
+          </tr>
+          <tr v-for="todo in list" v-if="todo.flag === false" class="completeTasks">
+            <td>
+              {{ todo.id }}<br>
+            </td>
+            <td class="todo">{{ todo.text }}</td>
+            <td>
+              <button @click="changeToDo(todo.id)" class="return">未完</button>
+            </td>
+            <td>
+              <button @click="deleteToDo(todo.id)">削除</button>
+            </td>
+            <td>
+              {{ todo.date }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
